@@ -58,8 +58,6 @@ function updateMousePosition(eX, eY) {
       y: eY 
     };
     sessionStorage.setItem('lastCursorPosition', JSON.stringify(this.currentPosition));
-    console.log("test");
-
 }
 
 setupCanvas();
