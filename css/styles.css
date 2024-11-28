@@ -155,8 +155,14 @@ body {
 /* Mobile responsiveness */
 
 @media screen and (max-width: 1045px) {
+
+  canvas {
+    visibility: hidden;
+  }
+
   body {
       padding: 20px 0; 
+      cursor: auto;
   }
 
   #my-profile {
