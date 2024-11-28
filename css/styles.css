@@ -1,0 +1,189 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('../fonts/HankenGrotesk-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontAwesomeBrands';
+  src: url('../fonts/fa-brands-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fa-solid-900.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Hanken Grotesk', sans-serif;
+  color: #0C1B33;
+  background-color: #F5F1ED;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 0; /* Vertical body padding */
+  cursor:none;
+  position:relative;
+}
+
+/* Main container styles */
+.main-container {
+  width: 80%;
+  display: flex;
+  height: calc(100vh - 80px); /* Subtract body padding from viewport height */
+  max-height: calc(100vh - 80px);
+  gap: 9vw;
+}
+
+/* Left and right content styles */
+.left-content, .right-content {
+  padding: 20px;
+}
+
+.left-content {
+  flex: 1;
+  overflow: hidden; /* Prevent left content from scrolling */
+  flex-direction: column;
+  display: flex;
+  text-align:left;
+}
+
+.right-content {
+  flex: 3;
+  overflow-y: auto; /* Enable scrolling only for right content */
+  max-height: 100%; /* Ensure it doesn't exceed container height */
+
+}
+
+#my-name {
+  font-weight: 700;
+  white-space: nowrap;
+  margin-bottom: 5px;
+  font-size: clamp(30px,2.5vw,100px);
+}
+
+#my-profile {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.navlink {
+  flex: 1;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-bottom: 5px;
+  font-size: clamp(20px,2.0vw,100px);
+  text-decoration: none;
+  color: #0C1B33;
+}
+
+#navlink-selected {
+  color: #628395;
+  font-style: italic;
+  text-decoration: none;
+}
+
+#email-icon {
+  font-family: "FontAwesome";
+  color: #0C1B33;
+  font-size: clamp(30px,2.0vw,100px);
+  text-decoration: none;
+}
+
+#github-icon {
+  font-family: "FontAwesomeBrands";
+  color: black;
+  font-size: clamp(30px,2.0vw,100px);
+  text-decoration: none;
+}
+
+#linkedin-icon {
+  font-family: "FontAwesomeBrands";
+  color: #0072b1;
+  font-size: clamp(30px,2.0vw,100px);
+  text-decoration: none;
+}
+
+#email-info {
+  margin-top:10px;
+  font-size: clamp(15px,1.0vw,100px);
+}
+
+/* Example content styles */
+.content-text {
+  margin-bottom: 30px;
+  font-size: clamp(15px,1.15vw,100px);
+}
+
+.end-page {
+  position: relative;
+}
+.end-page::after {
+  content: "∎";          /* The character to append */
+  position: absolute;    /* Absolute position relative to the parent */
+  right: 0px;              /* Align to the right */
+  bottom: -1em;             /* Align to the bottom */
+  color: #0C1B33;
+  font-size: clamp(15px,1.15vw,100px);
+  pointer-events: none;
+}
+
+
+#copyright {
+  position:absolute;
+  bottom:0;
+  right:0;
+  margin:5px;
+  font-size:0.8em; 
+}
+
+/* Mobile responsiveness */
+
+@media screen and (max-width: 1045px) {
+  body {
+      padding: 20px 0; 
+  }
+
+  #my-profile {
+    width: clamp(0px,60%,300px);
+  }
+
+  .main-container {
+      flex-direction: column;
+      width: 80%;
+      height: auto; 
+      max-height: none;
+      gap: 20px;
+  }
+
+  .left-content, .right-content {
+      width: 100%;
+      max-height: none;
+      overflow: visible;
+  }
+
+  .left-content {
+      align-items:center;
+      text-align:center;
+  }
+
+  .right-content {
+      overflow-y: visible;
+  }
+
+}
