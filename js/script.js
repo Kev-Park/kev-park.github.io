@@ -22,8 +22,8 @@ const params = {
     pointsNumber: 40,
     widthFactor: .3,
     mouseThreshold: .6,
-    spring: .4,
-    friction: .5
+    spring: 1.4,
+    friction: .3
 };
 
 const trail = new Array(params.pointsNumber);
