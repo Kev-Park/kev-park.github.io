@@ -5,7 +5,9 @@
   box-sizing: border-box;
 }
 
-
+.hyperlink {
+  color: #628395;
+}
 
 canvas {
   position: fixed;
@@ -40,6 +42,8 @@ body {
   cursor:none;
   position:relative;
 }
+
+
 
 /* Main container styles */
 .main-container {
