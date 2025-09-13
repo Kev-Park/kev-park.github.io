@@ -43,7 +43,11 @@ body {
   position:relative;
 }
 
-
+/* Custom scrollbar styles */
+.right-content {
+  scrollbar-color: #d5d2ce #F5F1ED;
+  scrollbar-width: thin;
+}
 
 /* Main container styles */
 .main-container {
@@ -102,6 +106,11 @@ body {
   text-decoration: none;
 }
 
+.no-link {
+  text-decoration: none;
+  color: #0C1B33;
+}
+
 #email-icon {
   font-family: "FontAwesome";
   color: #0C1B33;
@@ -128,25 +137,26 @@ body {
   font-size: clamp(15px,1.0vw,100px);
 }
 
+.link-icon {
+  font-family: "FontAwesome";
+  text-decoration: none;
+  color: #0C1B33;
+  margin-left: 5px;
+  font-size: clamp(15px,1.0vw,100px);
+}
+
 /* Example content styles */
 .content-text {
-  margin-bottom: 30px;
   font-size: clamp(15px,1.15vw,100px);
 }
 
-.end-page {
-  position: relative;
-}
-.end-page::after {
-  content: "∎";          /* The character to append */
-  position: absolute;    /* Absolute position relative to the parent */
-  right: 0px;              /* Align to the right */
-  bottom: -1em;             /* Align to the bottom */
+#end-page {
+  text-align: right;              /* Align to the right */
   color: #0C1B33;
   font-size: clamp(15px,1.15vw,100px);
   pointer-events: none;
+  margin-bottom: 30px;
 }
-
 
 #copyright {
   position:absolute;

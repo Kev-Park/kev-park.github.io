@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin Park's Portfolio - Personal Work</title>
+    <link rel="icon" type="image/x-icon" href="../media/robot.svg">
+    <link rel="apple-touch-icon" href="../media/robot.svg">
+    <!-- Updated CSS link to reflect folder structure -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <canvas></canvas>
+
+    <div class="main-container">
+        <div class="left-content">
+            <!-- Left side content -->
+            <div id="my-name">Kevin Park</div>
+            <img src="../media/kevinprofile.png" id="my-profile"></img>
+
+            <a class="navlink" href="../index.html">About</a>
+            <a class="navlink" href="../resume.html">Resume</a>
+            <a class="navlink" href="../academics.html">Academics</a>
+            <a class="navlink" id="navlink-selected" href="../personalwork.html">Personal Work</a>
+
+            <div style="margin-top:20px;flex-direction:row;gap:25px;display:flex;">
+                <a id="email-icon" href="mailto:kp0374@princeton.edu">&#xf0e0</a>
+                <a id="github-icon" href="https://github.com/Kev-Park">&#xf09b</a>
+                <a id="linkedin-icon" href="https://linkedin.com/in/kev-pk">&#xf08c</a>
+            </div>
+
+            <div id="email-info">
+                <b>Contact</b>
+                <p>kp0374 [at] princeton [dot] edu</p>
+            </div>
+                
+        </div>
+        
+        <div class="right-content">
+            <!-- Right side content with many items to demonstrate scrolling -->
+            <p class="content-text">
+
+                <h1>Synthetic Data for Soft Body Manipulation</h1>
+                <i>thinkingsquishy: exploring synthetic data generation techniques for soft-body manipulation tasks.</i><br><br><br>
+
+                Exploring possible synthetic data generation techniques based off of <a class="hyperlink" href="https://arxiv.org/pdf/2401.13231">Dittogym</a> for soft body manipulation tasks. See the code <a class="hyperlink" href="https://github.com/Alex-Lee-Chang/thinkingsquishy">here</a>. Currently a work in progress.<br><br> 
+                
+                Generalist robots generally struggle with precise deformable object manipulation due to a variety of reasons, including hardware limitations (e.g. gripper design), sensory inadequacies (most models omit tactile feedback in favor of image input), but also a lack of high-quality in-distribution data. This work leverages existing physics-accurate soft robot policies, enforcing policy movement restrictions in order to generate ideal trajectories completable by prehensile manipulation.
+
+                <div id="end-page">∎</div>
+            </p>
+            
+        </div>
+    </div>
+
+    <!-- Updated JavaScript link to reflect folder structure -->
+    <script src="../js/script.js"></script>
+
+    <div id="copyright">© Copyright <script>document.write(new Date().getFullYear())</script> Kevin Park.</div>
+</body>
+</html>

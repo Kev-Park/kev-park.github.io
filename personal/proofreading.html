@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin Park's Portfolio - Personal Work</title>
+    <link rel="icon" type="image/x-icon" href="../media/robot.svg">
+    <link rel="apple-touch-icon" href="../media/robot.svg">
+    <!-- Updated CSS link to reflect folder structure -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <canvas></canvas>
+
+    <div class="main-container">
+        <div class="left-content">
+            <!-- Left side content -->
+            <div id="my-name">Kevin Park</div>
+            <img src="../media/kevinprofile.png" id="my-profile"></img>
+
+            <a class="navlink" href="../index.html">About</a>
+            <a class="navlink" href="../resume.html">Resume</a>
+            <a class="navlink" href="../academics.html">Academics</a>
+            <a class="navlink" id="navlink-selected" href="../personalwork.html">Personal Work</a>
+
+            <div style="margin-top:20px;flex-direction:row;gap:25px;display:flex;">
+                <a id="email-icon" href="mailto:kp0374@princeton.edu">&#xf0e0</a>
+                <a id="github-icon" href="https://github.com/Kev-Park">&#xf09b</a>
+                <a id="linkedin-icon" href="https://linkedin.com/in/kev-pk">&#xf08c</a>
+            </div>
+
+            <div id="email-info">
+                <b>Contact</b>
+                <p>kp0374 [at] princeton [dot] edu</p>
+            </div>
+                
+        </div>
+        
+        <div class="right-content">
+            <!-- Right side content with many items to demonstrate scrolling -->
+            <p class="content-text">
+
+                <h1>Agentic Connectomic Proofreading</h1>
+                <i>Automated proofreading of a full brain connectome using Neuroglancer with a computer-using agent.</i><br><br><br>
+
+                Developing an end-to-end pipeline for a computer-using agent/foundation model capable of autonomously proofreading a full brain connectome in Neuroglancer. See <a class="hyperlink" href="https://kev-park.github.io/neuroglancer-benchmark/">here</a> for more (not updated) information on connectomics/proofreading. See <a class="hyperlink" href="https://github.com/seung-lab/ngl_bench/">here</a> for a Python repository (written with <a class="hyperlink" href="https://raphaellevisse.github.io/">Raphaël Levisse</a>) that simplifies interactions with Neuroglancer.<br><br>
+
+                EM collection and image analysis has enabled the release of a full wiring diagram of a fly brain. Scaling towards full mouse (and potentially human) connectomes will require significant innovation in both image segmentation and proofreading to deal with the petabyte-scale amounts of data involved.<br><br>
+
+                Proofreading - manual verification of neurons and their wirings - is an expensive and time-consuming bottleneck preventing such scaling.
+
+                <div id="end-page">∎</div>
+            </p>
+            
+        </div>
+    </div>
+
+    <!-- Updated JavaScript link to reflect folder structure -->
+    <script src="../js/script.js"></script>
+
+    <div id="copyright">© Copyright <script>document.write(new Date().getFullYear())</script> Kevin Park.</div>
+</body>
+</html>
