@@ -7,7 +7,12 @@
     <link rel="icon" type="image/x-icon" href="../media/robot.svg">
     <link rel="apple-touch-icon" href="../media/robot.svg">
     <!-- Updated CSS link to reflect folder structure -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css?v=20260903">
+    <!-- Hide the native cursor immediately. styles.css is a separate request,
+         and until it arrives the document has no cursor rule, so the browser
+         paints the default pointer - that is the flash seen on every click
+         that navigates to another page. Inlining it removes the gap. -->
+    <style>html,body,body *{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none}@media screen and (max-width:1045px){html,body,body *{cursor:revert}}</style>
 </head>
 <body>
     <canvas></canvas>
@@ -63,8 +68,8 @@
     </div>
 
     <!-- Updated JavaScript link to reflect folder structure -->
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js?v=20260903"></script>
 
-    <div id="copyright">© Copyright <script>document.write(new Date().getFullYear())</script> Kevin Park.</div>
+    <div id="copyright">© Copyright <span class="year">2026</span> Kevin Park.</div>
 </body>
 </html>

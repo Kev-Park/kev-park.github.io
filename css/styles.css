@@ -72,6 +72,16 @@ body {
    repaint the native pointer for a frame when the cursor value is recomputed
    (after a click, focus change or hover-state change), and an image cursor
    does not flash that way. `none` is kept as the fallback. */
+/* A link or image that is dragged even a pixel on mousedown hands the cursor
+   to the browser's drag machinery, which paints its own pointer that CSS
+   cannot override - so suppress dragging on them. */
+a,
+img,
+video {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
 html,
 body *,
 body *::before,
