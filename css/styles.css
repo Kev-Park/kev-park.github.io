@@ -116,6 +116,12 @@ body *:focus-visible {
   overflow-y: auto; /* Enable scrolling only for right content */
   max-height: 100%; /* Ensure it doesn't exceed container height */
 
+  /* Flex items default to min-width:auto, so they refuse to shrink below
+     their min-content width. A replaced element sized with a percentage
+     (see .viewer video) contributes its full intrinsic width to that
+     min-content size, so a wide video widens this column past
+     .main-container as soon as its metadata loads. */
+  min-width: 0;
 }
 
 .pdf-embed {
@@ -219,12 +225,14 @@ body *:focus-visible {
 .viewer {
   display: block;
   width: 100%;
+  max-width: 100%;
   margin: 10px 0 30px; /* <figure> has a large default UA margin - reset it */
 }
 
 .viewer video {
   display: block;
   width: 100%;
+  max-width: 100%; /* never exceed the column, whatever the intrinsic size */
   height: auto;
   pointer-events: none; /* nothing to click: no controls, no context menu */
 }
