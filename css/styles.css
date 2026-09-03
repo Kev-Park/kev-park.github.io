@@ -46,6 +46,14 @@ canvas {
   src: url('../fonts/fa-solid-900.ttf') format('truetype');
 }
 
+/* fully transparent 32x32 cursor image - see the cursor rules below */
+:root {
+  /* shared size for body copy in .right-content (see .content-text) */
+  --content-font-size: clamp(15px,1.15vw,100px);
+
+  --no-cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none;
+}
+
 body {
   font-family: 'Hanken Grotesk', sans-serif;
   color: #0C1B33;
@@ -54,8 +62,25 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 40px 0; /* Vertical body padding */
-  cursor:none;
+  cursor: var(--no-cursor);
   position:relative;
+}
+
+/* Hide the native cursor everywhere, including over links, buttons and
+   selectable text where the UA stylesheet would otherwise force its own.
+   A fully transparent cursor image is used instead of plain `none`: browsers
+   repaint the native pointer for a frame when the cursor value is recomputed
+   (after a click, focus change or hover-state change), and an image cursor
+   does not flash that way. `none` is kept as the fallback. */
+html,
+body *,
+body *::before,
+body *::after,
+body *:hover,
+body *:active,
+body *:focus,
+body *:focus-visible {
+  cursor: var(--no-cursor);
 }
 
 /* Custom scrollbar styles */
@@ -171,15 +196,54 @@ body {
 
 /* Example content styles */
 .content-text {
-  font-size: clamp(15px,1.15vw,100px);
+  font-size: var(--content-font-size);
 }
 
 #end-page {
   text-align: right;              /* Align to the right */
   color: #0C1B33;
-  font-size: clamp(15px,1.15vw,100px);
+  font-size: var(--content-font-size);
   pointer-events: none;
   margin-bottom: 30px;
+}
+
+/* Video viewer: a looping, chrome-less video with an optional caption.
+
+   <figure class="viewer">
+     <video src="../videos/demo.mp4"></video>
+     <figcaption>Caption text.</figcaption>
+   </figure>
+
+   The autoplay/loop/muted attributes are applied by js/script.js, so the
+   markup only needs the src. Omit the figcaption for an uncaptioned video. */
+.viewer {
+  display: block;
+  width: 100%;
+  margin: 10px 0 30px; /* <figure> has a large default UA margin - reset it */
+}
+
+.viewer video {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none; /* nothing to click: no controls, no context menu */
+}
+
+/* belt and braces: hide the native controls even if the attribute is set */
+.viewer video::-webkit-media-controls,
+.viewer video::-webkit-media-controls-enclosure,
+.viewer video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+.viewer figcaption {
+  margin-top: 10px;
+  /* inherit the size of the surrounding copy so the caption always matches
+     the text it sits in; swap for var(--content-font-size) to pin it to the
+     .content-text size instead */
+  font-size: inherit;
+  font-style: italic;
+  text-align: left;
 }
 
 #copyright {
@@ -198,9 +262,20 @@ body {
     visibility: hidden;
   }
 
+  html {
+      cursor: auto;
+  }
+
   body {
       padding: 20px 0; 
       cursor: auto;
+  }
+
+  /* restore the browser's own cursors (pointer on links, I-beam on text) */
+  body *,
+  body *::before,
+  body *::after {
+    cursor: revert;
   }
 
   #my-profile {

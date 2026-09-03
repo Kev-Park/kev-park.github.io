@@ -4,6 +4,10 @@ const ctx = canvas.getContext('2d');
 // for intro motion
 let mouseMoved = false;
 
+// set to true to bring back the trailing brush-stroke cursor
+const trailEnabled = false;
+const cursorRadius = 6;
+
 
 
 const pointer = {
@@ -85,6 +89,16 @@ function update(t) {
     ctx.strokeStyle = "#0C1B33";
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (!trailEnabled) {
+        ctx.fillStyle = "#0C1B33";
+        ctx.beginPath();
+        ctx.arc(pointer.x, pointer.y, cursorRadius, 0, 2 * Math.PI);
+        ctx.fill();
+        window.requestAnimationFrame(update);
+        return;
+    }
+
     trail.forEach((p, pIdx) => {
         const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
         const spring = pIdx === 0 ? .4 * params.spring : params.spring;
@@ -117,3 +131,22 @@ function setupCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
+
+/* --- .viewer videos ---------------------------------------------------
+   Configure every <video> inside a .viewer so the markup only has to carry
+   the src: no controls, muted (browsers block autoplay with sound), looping
+   forever, and playing inline rather than fullscreen on mobile Safari. */
+document.querySelectorAll(".viewer video").forEach(video => {
+    video.controls = false;
+    video.loop = true;
+    video.muted = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");            // older iOS reads the attribute
+    video.setAttribute("disablepictureinpicture", "");
+    video.setAttribute("preload", "metadata");
+
+    const play = () => video.play().catch(() => {});  // ignore autoplay rejections
+    play();
+    video.addEventListener("loadeddata", play, { once: true });
+});
