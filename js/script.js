@@ -1,4 +1,8 @@
-const canvas = document.querySelector("canvas");
+// The cursor is drawn on a full-viewport canvas. A page that forgets to
+// include one still gets a cursor: create it rather than throwing, which
+// would take the navigation and video setup down with it.
+const canvas = document.querySelector("canvas")
+    || document.body.appendChild(document.createElement("canvas"));
 const ctx = canvas.getContext('2d');
 
 // for intro motion
