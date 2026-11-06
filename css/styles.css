@@ -28,6 +28,7 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000; /* Draw the cursor above positioned content and scrollbars. */
   pointer-events: none;
 }
 
@@ -94,7 +95,9 @@ body *:focus-visible {
 }
 
 /* Custom scrollbar styles */
-.right-content {
+.right-content,
+.news-scroll,
+.news-scrollbar {
   scrollbar-color: #d5d2ce #F5F1ED;
   scrollbar-width: thin;
 }
@@ -223,6 +226,116 @@ body *:focus-visible {
   margin-bottom: 30px;
 }
 
+/* Keep the original News height, with scrolling inset from the card border. */
+.news {
+  margin-top: 2.5em;
+  padding-bottom: 5px; /* Keep the card's shadow inside the scroll area. */
+  font-size: var(--content-font-size);
+}
+
+.news-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 8px;
+  font-size: 1.4375em;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.news-heading img {
+  flex: none;
+}
+
+.news-card {
+  position: relative;
+  height: 9.5625em;
+  overflow: hidden;
+  padding: 0 0.5em;
+  border: 1px solid #0C1B33;
+  border-radius: 8px;
+  box-shadow: 2px 1px 4px 1px rgb(0 0 0 / 22%);
+}
+
+.news-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.5em 1em 1.5em 2.25em;
+}
+
+/* A separate native scroll track keeps its inset independent of text clipping.
+   The enhancement is enabled only after JavaScript has connected the track. */
+.news-card.has-news-scrollbar .news-scroll {
+  scrollbar-width: none;
+  padding-right: calc(1em + 6px);
+}
+
+.news-card.has-news-scrollbar .news-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.news-scrollbar {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: 8px;
+  width: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.news-scrollbar[hidden] {
+  display: none;
+}
+
+.news-scroll:focus-visible {
+  outline: 2px solid #628395;
+  outline-offset: -2px;
+}
+
+/* Anchor the timeline to the full list so it scrolls with every event. */
+.news-events::before {
+  content: "";
+  position: absolute;
+  top: -0.5em;
+  bottom: -0.5em;
+  left: calc(-1.0625em - 1px);
+  width: 2px;
+  background: url('../media/news-timeline.svg') center / 100% 100% no-repeat;
+}
+
+.news-events {
+  position: relative;
+  min-height: calc(9.5625em - 3em - 2px);
+  list-style: none;
+  color: #000;
+  line-height: 1.3125;
+  overflow-wrap: anywhere;
+}
+
+.news-event {
+  position: relative;
+}
+
+.news-event + .news-event {
+  margin-top: 1em;
+}
+
+.news-event::before {
+  content: "";
+  position: absolute;
+  top: 0.0625em;
+  left: -1.3125em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 2px 2px 0 2px;
+  background: #0C1B33;
+}
+
+.news-event time {
+  font-style: italic;
+}
+
 /* Video viewer: a looping, chrome-less video with an optional caption.
 
    <figure class="viewer">
@@ -272,10 +385,8 @@ body *:focus-visible {
   font-size:0.8em; 
 }
 
-/* Mobile responsiveness */
-
-@media screen and (max-width: 1045px) {
-
+/* Use native input behavior on touch devices, independent of layout width. */
+@media (hover: none), (pointer: coarse) {
   canvas {
     visibility: hidden;
   }
@@ -285,7 +396,6 @@ body *:focus-visible {
   }
 
   body {
-      padding: 20px 0; 
       cursor: auto;
   }
 
@@ -294,6 +404,13 @@ body *:focus-visible {
   body *::before,
   body *::after {
     cursor: revert;
+  }
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 1045px) {
+  body {
+      padding: 20px 0;
   }
 
   #my-profile {

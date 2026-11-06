@@ -7,12 +7,12 @@
     <link rel="icon" type="image/x-icon" href="media/robot.svg">
     <link rel="apple-touch-icon" href="media/robot.svg">
     <!-- Updated CSS link to reflect folder structure -->
-    <link rel="stylesheet" href="css/styles.css?v=20260903">
+    <link rel="stylesheet" href="css/styles.css?v=20261105">
     <!-- Hide the native cursor immediately. styles.css is a separate request,
          and until it arrives the document has no cursor rule, so the browser
          paints the default pointer - that is the flash seen on every click
          that navigates to another page. Inlining it removes the gap. -->
-    <style>html,body,body *{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none}@media screen and (max-width:1045px){html,body,body *{cursor:revert}}</style>
+    <style>html,body,body *{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none}@media (hover:none),(pointer:coarse){html,body,body *{cursor:revert}}</style>
 </head>
 <body>
     <canvas></canvas>
@@ -42,17 +42,38 @@
         </div>
         
         <div class="right-content">
-            <!-- Right side content with many items to demonstrate scrolling -->
+            <!-- Biography and news share the right column's scroll area. -->
             <p class="content-text">I am a fourth-year undergraduate student at Princeton University <img src="./media/princeton.png" alt="" class="inline-icon"> majoring in Mechanical Engineering with a minor in Robotics. I am advised by <a href="https://irom-lab.princeton.edu/majumdar/" class="hyperlink">Professor Anirudha Majumdar</a> at <a href="https://irom-lab.princeton.edu/" class="hyperlink">IRoM Lab</a>, where I am working on world models for robotics. I additionally collaborate with the <a href="https://ember-lab.eecs.berkeley.edu/" class="hyperlink">EMBER Center</a> at UC Berkeley <img src="./media/berkeley.png" alt="" class="inline-icon"> on humanoid whole body control. I am also a researcher in the <a href="https://seunglab.org/" class="hyperlink">Seung Lab</a>, where I work on RL for proofreading computer-using agents to accelerate connectomics. <br><br>I previously worked on synthetic data generation for soft body robotic manipulators in the <a href="https://prpl.group/" class="hyperlink">Princeton Robot Planning and Learning Lab</a> under Professor Tom Silver. I interned at the Volvo Group doing structural design for electric buses and at IBM working on coding agents.<br><br>Feel free to reach out over email!<br><br>
 I am applying to Ph.D. programs in robotics for Fall 2027. 
-                <div id="end-page">∎</div>
             </p>
-            
+            <div id="end-page">∎</div>
+
+
+
+            <section class="news" aria-labelledby="news-heading">
+                <h2 class="news-heading" id="news-heading">
+                    <img src="media/news-info.svg" alt="" aria-hidden="true">
+                    News
+                </h2>
+                <div class="news-card">
+                    <div class="news-scroll" tabindex="0" role="region" aria-labelledby="news-heading">
+                    <!-- Add events newest first by copying a <li> below.
+                         Use YYYY-MM-DD for datetime; links can use class="hyperlink". -->
+                    <ol class="news-events">
+
+                        <li class="news-event">
+                            <time datetime="2026-11-12">Nov. 12, 2026</time> - I will be attending CoRL 2026 in Austin, Texas! 
+                        </li>
+
+                    </ol>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
     <!-- Updated JavaScript link to reflect folder structure -->
-    <script src="js/script.js?v=20260903"></script>
+    <script src="js/script.js?v=20261106"></script>
 
     <div id="copyright">© Copyright <span class="year">2026</span> Kevin Park.</div>
 </body>

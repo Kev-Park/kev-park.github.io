@@ -45,15 +45,15 @@ for (let i = 0; i < params.pointsNumber; i++) {
 }
 
 window.addEventListener("click", e => {
-    updateMousePosition(e.pageX, e.pageY);
+    updateMousePosition(e.clientX, e.clientY);
 });
 window.addEventListener("mousemove", e => {
     mouseMoved = true;
-    updateMousePosition(e.pageX, e.pageY);
+    updateMousePosition(e.clientX, e.clientY);
 });
 window.addEventListener("touchmove", e => {
     mouseMoved = true;
-    updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+    updateMousePosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
 });
 
 function updateMousePosition(eX, eY) {
@@ -139,9 +139,51 @@ function setupCanvas() {
 /* --- page setup -------------------------------------------------------
    Everything that has to run against the content currently in <body>. Called
    once on load, and again after every same-document navigation below. */
+let newsResizeObserver;
+
 function setupPage() {
     setupViewers();
     stampYear();
+    setupNewsScrollbar();
+}
+
+function setupNewsScrollbar() {
+    newsResizeObserver?.disconnect();
+    const content = document.querySelector('.news-scroll');
+    if (!content) return;
+
+    const card = content.closest('.news-card');
+    card.querySelector('.news-scrollbar')?.remove();
+    const track = document.createElement('div');
+    track.className = 'news-scrollbar';
+    track.setAttribute('aria-hidden', 'true');
+    track.tabIndex = -1;
+    const spacer = track.appendChild(document.createElement('div'));
+    card.appendChild(track);
+    card.classList.add('has-news-scrollbar');
+
+    // Both elements use native scrolling. Map their ranges because the
+    // inset track is shorter than the full-height text viewport.
+    const sync = (from, to) => {
+        const range = from.scrollHeight - from.clientHeight;
+        const top = range > 0
+            ? from.scrollTop / range * (to.scrollHeight - to.clientHeight)
+            : 0;
+        if (Math.abs(to.scrollTop - top) > 0.5) to.scrollTop = top;
+    };
+    content.addEventListener('scroll', () => sync(content, track), { passive: true });
+    track.addEventListener('scroll', () => sync(track, content), { passive: true });
+
+    const resize = () => {
+        track.hidden = content.scrollHeight <= content.clientHeight + 1;
+        if (track.hidden) return;
+        spacer.style.height = `${Math.ceil(track.clientHeight * content.scrollHeight / content.clientHeight)}px`;
+        sync(content, track);
+    };
+    newsResizeObserver = new ResizeObserver(resize);
+    newsResizeObserver.observe(content);
+    newsResizeObserver.observe(content.querySelector('.news-events'));
+    resize();
 }
 
 /* Configure every <video> inside a .viewer so the markup only has to carry

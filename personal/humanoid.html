@@ -12,7 +12,7 @@
          and until it arrives the document has no cursor rule, so the browser
          paints the default pointer - that is the flash seen on every click
          that navigates to another page. Inlining it removes the gap. -->
-    <style>html,body,body *{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none}@media screen and (max-width:1045px){html,body,body *{cursor:revert}}</style>
+    <style>html,body,body *{cursor:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGklEQVR42u3BAQEAAACCIP+vbkhAAQAAAO8GECAAAcm1w7EAAAAASUVORK5CYII=") 16 16, none}@media (hover:none),(pointer:coarse){html,body,body *{cursor:revert}}</style>
 </head>
 <body>
     <canvas></canvas>
