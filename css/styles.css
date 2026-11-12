@@ -97,6 +97,7 @@ body *:focus-visible {
 /* Custom scrollbar styles */
 .right-content,
 .news-scroll,
+.publications-scroll,
 .news-scrollbar {
   scrollbar-color: #d5d2ce #F5F1ED;
   scrollbar-width: thin;
@@ -227,13 +228,15 @@ body *:focus-visible {
 }
 
 /* Keep the original News height, with scrolling inset from the card border. */
-.news {
+.news,
+.publications {
   margin-top: 2.5em;
   padding-bottom: 5px; /* Keep the card's shadow inside the scroll area. */
   font-size: var(--content-font-size);
 }
 
-.news-heading {
+.news-heading,
+.publications-heading {
   display: flex;
   align-items: center;
   gap: 11px;
@@ -243,11 +246,13 @@ body *:focus-visible {
   font-weight: 700;
 }
 
-.news-heading img {
+.news-heading img,
+.publications-heading img {
   flex: none;
 }
 
-.news-card {
+.news-card,
+.publications-card {
   position: relative;
   height: 9.5625em;
   overflow: hidden;
@@ -257,7 +262,8 @@ body *:focus-visible {
   box-shadow: 2px 1px 4px 1px rgb(0 0 0 / 22%);
 }
 
-.news-scroll {
+.news-scroll,
+.publications-scroll {
   height: 100%;
   overflow-y: auto;
   padding: 1.5em 1em 1.5em 2.25em;
@@ -265,12 +271,14 @@ body *:focus-visible {
 
 /* A separate native scroll track keeps its inset independent of text clipping.
    The enhancement is enabled only after JavaScript has connected the track. */
-.news-card.has-news-scrollbar .news-scroll {
+.has-news-scrollbar > .news-scroll,
+.has-news-scrollbar > .publications-scroll {
   scrollbar-width: none;
   padding-right: calc(1em + 6px);
 }
 
-.news-card.has-news-scrollbar .news-scroll::-webkit-scrollbar {
+.has-news-scrollbar > .news-scroll::-webkit-scrollbar,
+.has-news-scrollbar > .publications-scroll::-webkit-scrollbar {
   display: none;
 }
 
@@ -288,7 +296,8 @@ body *:focus-visible {
   display: none;
 }
 
-.news-scroll:focus-visible {
+.news-scroll:focus-visible,
+.publications-scroll:focus-visible {
   outline: 2px solid #628395;
   outline-offset: -2px;
 }
@@ -334,6 +343,89 @@ body *:focus-visible {
 
 .news-event time {
   font-style: italic;
+}
+
+.publications-card {
+  height: 13.9375em;
+}
+
+.publications-heading {
+  gap: 9px;
+}
+
+.publications-scroll {
+  padding-left: 1.125em;
+}
+
+.publication-list,
+.publication-details {
+  list-style: none;
+}
+
+.publication-list {
+  line-height: 1.3125;
+  overflow-wrap: anywhere;
+}
+
+.publication + .publication {
+  margin-top: 1.375em;
+}
+
+.publication-title {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+/* Inline details let long venue text use the space after the links and
+   wrap naturally. Each optional item still owns its leading separator. */
+.publication-details {
+  margin-top: 2px;
+  font-size: 0.875em;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.publication-details:empty {
+  display: none;
+}
+
+.publication-details > li {
+  display: inline;
+}
+
+.publication-details > li + li::before {
+  content: "|";
+  display: inline-block;
+  margin: 0 0.75em;
+  color: #0C1B33;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.publication-detail {
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+  max-width: 100%;
+}
+
+a.publication-detail:hover,
+a.publication-detail:focus-visible {
+  color: #628395;
+  text-decoration: underline;
+}
+
+.publication-detail img {
+  margin-right: 4px;
+  vertical-align: -0.15em;
+}
+
+.publication-arxiv-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
 }
 
 /* Video viewer: a looping, chrome-less video with an optional caption.
@@ -404,6 +496,39 @@ body *:focus-visible {
   body *::before,
   body *::after {
     cursor: revert;
+  }
+}
+
+/* In the side-by-side layout, only the right column should scroll.
+   Fixing the page also prevents iPad Safari from panning the whole layout
+   when a swipe starts on the sidebar or reaches the end of the column. */
+@media screen and (min-width: 1045.01px) {
+  html {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .main-container {
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
+    max-height: calc(100dvh - 80px);
+    min-height: 0;
+  }
+
+  .right-content {
+    min-height: 0;
+    overscroll-behavior-y: contain;
   }
 }
 

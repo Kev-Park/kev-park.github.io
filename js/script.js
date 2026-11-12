@@ -139,20 +139,22 @@ function setupCanvas() {
 /* --- page setup -------------------------------------------------------
    Everything that has to run against the content currently in <body>. Called
    once on load, and again after every same-document navigation below. */
-let newsResizeObserver;
+let cardResizeObservers = [];
 
 function setupPage() {
     setupViewers();
     stampYear();
-    setupNewsScrollbar();
+    setupCardScrollbars();
 }
 
-function setupNewsScrollbar() {
-    newsResizeObserver?.disconnect();
-    const content = document.querySelector('.news-scroll');
-    if (!content) return;
+function setupCardScrollbars() {
+    cardResizeObservers.forEach(observer => observer.disconnect());
+    cardResizeObservers = [];
+    document.querySelectorAll('.news-scroll, .publications-scroll').forEach(setupCardScrollbar);
+}
 
-    const card = content.closest('.news-card');
+function setupCardScrollbar(content) {
+    const card = content.closest('.news-card, .publications-card');
     card.querySelector('.news-scrollbar')?.remove();
     const track = document.createElement('div');
     track.className = 'news-scrollbar';
@@ -180,9 +182,10 @@ function setupNewsScrollbar() {
         spacer.style.height = `${Math.ceil(track.clientHeight * content.scrollHeight / content.clientHeight)}px`;
         sync(content, track);
     };
-    newsResizeObserver = new ResizeObserver(resize);
-    newsResizeObserver.observe(content);
-    newsResizeObserver.observe(content.querySelector('.news-events'));
+    const observer = new ResizeObserver(resize);
+    observer.observe(content);
+    observer.observe(content.querySelector('.news-events, .publication-list'));
+    cardResizeObservers.push(observer);
     resize();
 }
 

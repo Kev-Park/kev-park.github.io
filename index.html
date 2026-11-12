@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="media/robot.svg">
     <link rel="apple-touch-icon" href="media/robot.svg">
     <!-- Updated CSS link to reflect folder structure -->
-    <link rel="stylesheet" href="css/styles.css?v=20261105">
+    <link rel="stylesheet" href="css/styles.css?v=20261106-publications">
     <!-- Hide the native cursor immediately. styles.css is a separate request,
          and until it arrives the document has no cursor rule, so the browser
          paints the default pointer - that is the flash seen on every click
@@ -69,11 +69,34 @@ I am applying to Ph.D. programs in robotics for Fall 2027.
                     </div>
                 </div>
             </section>
+            <section class="publications" aria-labelledby="publications-heading">
+                <h2 class="publications-heading" id="publications-heading">
+                    <img src="media/publications-cap.svg" alt="" aria-hidden="true">
+                    Publications
+                </h2>
+                <div class="publications-card">
+                    <div class="publications-scroll" tabindex="0" role="region" aria-labelledby="publications-heading">
+                        <!-- Copy a publication <li> for each paper. Each details <li>
+                             is optional; add, remove, or reorder resources and venues freely. -->
+                        <ol class="publication-list">
+                            <li class="publication">
+                                <h3 class="publication-title">DreamVLA: From Generated Human Motions to Humanoid Vision-Language-Action Policies</h3>
+                                <p class="publication-authors"><strong>Kevin Park</strong>, Izat Rasyad, Dvij Kalaria, Shankar Sastry</p>
+                                <ul class="publication-details" aria-label="Paper resources and venue">
+                                    <li><a class="publication-detail" href="https://arxiv.org/abs/2611.10872"><img class="publication-arxiv-icon" src="media/publication-arxiv.png" alt="" aria-hidden="true">arXiv:2611.10872</a></li>
+                                    <li><a class="publication-detail" href="https://ember-center-berkeley.github.io/DreamVLA/">Site</a></li>
+                                    <li><span class="publication-detail">CoRL 2026 - workshops</span></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
     <!-- Updated JavaScript link to reflect folder structure -->
-    <script src="js/script.js?v=20261106"></script>
+    <script src="js/script.js?v=20261106-publications"></script>
 
     <div id="copyright">© Copyright <span class="year">2026</span> Kevin Park.</div>
 </body>
